@@ -1,18 +1,18 @@
 import click
-from .core import Crypto
+from .crypt import Crypt
 
 
 @click.group()
 def ccrypt():
-    """A simple cryptography wrapper"""
+    """A simple Cryptgraphy wrapper"""
     pass
 
 
 @ccrypt.command()
 @click.argument('fp', nargs=1)
 def encrypt(fp):
-    c = Crypto()
-    with open(fp, 'rb') as fid:
+    c = Crypt()
+    with open(fp, 'r') as fid:
         file_contents = fid.read()
     with open(fp, 'wb') as fid:
         enc = c._encrypt(file_contents)
@@ -23,7 +23,7 @@ def encrypt(fp):
 @click.option("--key", "key_path", default=".key")
 @click.argument("fp", nargs=1)
 def decrypt(key_path, fp):
-    c = Crypto()
+    c = Crypt()
     with open(fp, 'rb') as fid:
         target = fid.read()
     with open(key_path, 'rb') as fid:

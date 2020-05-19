@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 
 
-class Crypto:
+class Crypt:
 
     def _generate_key(self):
         key = Fernet.generate_key()
@@ -13,7 +13,8 @@ class Crypto:
         if key is None:
             key = self._generate_key()
         f = Fernet(key)
-        return f.encrypt(target)
+        bytestr = target.encode()
+        return f.encrypt(bytestr)
 
     def _decrypt(self, target, key):
         f = Fernet(key)
